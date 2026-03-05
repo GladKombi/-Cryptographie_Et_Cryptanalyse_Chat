@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-lg-9 mx-auto">
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-white py-3">
+                <h6 class="m-0 font-weight-bold text-info">Paramètres de la Matrice</h6>
+            </div>
+            <div class="card-body p-4">
+                <form action="traitement_hill.php" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Opération</label>
+                        <select class="form-select" name="operation">
+                            <option value="1">🔒 Chiffrer</option>
+                            <option value="2">🔓 Déchiffrer</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Message (longueur paire conseillée)</label>
+                        <input required type="text" name="message" class="form-control" placeholder="Ex: CODE">
+                    </div>
+
+                    <label class="form-label fw-bold mb-2">Matrice de la clé $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$</label>
+                    <div class="row g-3 mb-4">
+                        <div class="col-3">
+                            <input required type="number" name="a" class="form-control text-center" placeholder="a">
+                        </div>
+                        <div class="col-3">
+                            <input required type="number" name="b" class="form-control text-center" placeholder="b">
+                        </div>
+                        <div class="col-3">
+                            <input required type="number" name="c" class="form-control text-center" placeholder="c">
+                        </div>
+                        <div class="col-3">
+                            <input required type="number" name="d" class="form-control text-center" placeholder="d">
+                        </div>
+                    </div>
+
+                    <button type="submit" name="chiffrer" class="btn btn-info text-white w-100 py-2 fw-bold">
+                        Calculer Hill
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <?php if (isset($_SESSION['resultat_hill'])): ?>
+            <div class="card border-start border-info border-4 shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <label class="small fw-bold text-muted text-uppercase">Résultat :</label>
+                        <a href="clear_session.php" class="btn btn-sm btn-link text-danger p-0">Effacer</a>
+                    </div>
+                    <div class="mt-2 p-3 bg-light rounded font-monospace fs-4 text-center">
+                        <?= htmlspecialchars($_SESSION['resultat_hill']) ?>
+                    </div>
+                </div>
+            </div>
+            <?php unset($_SESSION['resultat_hill']); ?>
+        <?php endif; ?>
+    </div>
+</div>
